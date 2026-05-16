@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+.env
+*.db
+
+# Ignore any other files or directories you want to exclude from version control
