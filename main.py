@@ -1,6 +1,9 @@
 from fastapi import FastAPI
+from app.routes.auth import router as auth_router
 
-app = FastAPI()
+app = FastAPI(title="AI Interview Prep API")
+
+app.include_router(auth_router)
 
 @app.get("/")
 def root():
@@ -10,6 +13,3 @@ def root():
 def health():
     return {"status": "healthy"}
 
-@app.get("/test")
-def test():
-    return {"message": "Your first API endpoint works!"}
