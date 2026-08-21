@@ -10,6 +10,7 @@ class Question(Base):
     topic_id = Column(Integer, ForeignKey("topics.id"), nullable=False)
     difficulty = Column(String, nullable=False)
     question_text = Column(String, nullable=False)
+    hints = Column(String, nullable=True)
     ideal_answer_points = Column(String)
     generated_by = Column(String, default="ai")
     created_at = Column(DateTime(timezone=True), server_default=func.now())
