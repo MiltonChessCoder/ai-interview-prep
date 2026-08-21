@@ -1,9 +1,13 @@
 from fastapi import FastAPI
 from app.routes.auth import router as auth_router
+from app.routes.topics import router as topics_router
+from app.routes.questions import router as questions_router
 
 app = FastAPI(title="AI Interview Prep API")
 
 app.include_router(auth_router)
+app.include_router(topics_router)
+app.include_router(questions_router)
 
 @app.get("/")
 def root():
