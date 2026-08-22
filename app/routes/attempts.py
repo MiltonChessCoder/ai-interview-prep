@@ -7,15 +7,14 @@ from app.schemas.attempt import AttemptCreate, AttemptResponse
 from app.routes.auth import get_current_user
 from app.models.user import User
 from dotenv import load_dotenv
-import google.generativeai as genai
+from google import genai
 import json
 import os
 from typing import List
 
 load_dotenv()
 
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-client = genai.GenerativeModel("gemini-3.6-flash")
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 router = APIRouter(prefix="/attempts", tags=["attempts"])
 
@@ -47,7 +46,9 @@ Evaluate the candidate's answer and respond ONLY with a JSON object in this exac
 
     # Call Gemini API
     try:
-        response = client.generate_content(prompt)
+        response = client.models.generate_content(
+    model="gemini-3.6-flash",
+    contents=prompt)
         response_text = response.text.strip()
         if response_text.startswith("```"):
             response_text = response_text.split("```")[1]
